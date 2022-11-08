@@ -1,0 +1,41 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "doAll": "npm run build && npm run test && npm run prettier && npm run eslint && npm run start",
+    "nodemon": "nodemon",
+    "eslint": "eslint 'src/**/*.ts'",
+    "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "prepare": "npm run eslint && npm run prettier && npx tsc",
+    "test": "ENV=test db-migrate --env test up && jasmine-ts && db-migrate db:drop test",
+    "prebuild": "rm -rf build",
+    "build": "tsc -p ./tsconfig.json",
+    "prestart": "npm run build",
+    "start": "node ./build/index"
+    ,"jasmine": "jasmine -ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.14",
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pg": "^8.8.0",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^4.3.0",
+    "@types/pg": "^8.6.5",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
+    "jasmine": "^4.5.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.4.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "tsc-watch": "^5.0.3"
+  }
+}
