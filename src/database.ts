@@ -31,6 +31,8 @@ if(ENV === 'dev'){
     password:POSTGRES_PASSWORD,
 })
 }
+console.log('the env is :',ENV);
+
 // const query="INSERT INTO public.users(name, phone_number) VALUES ( 'mohaned', '0534569493');"
 // const getUsers = () => {
 //     client.query('SELECT * FROM users ', (error:any, results:any) => {

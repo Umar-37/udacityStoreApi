@@ -1,10 +1,9 @@
-import {MythicalWeaponStore} from '../src/models/mythical_weapon'
+import {MythicalWeaponStore} from '../models/mythical_weapon'
 
 const store=new MythicalWeaponStore();
+describe('/mythical weapon model', (): void => {
 
-describe('/mythical weapon model', ()=> {
-
-      it('should have an index method',  ():void => {
+      it('should have an index method',  () => {
             expect(store.index).toBeDefined()
       })
 

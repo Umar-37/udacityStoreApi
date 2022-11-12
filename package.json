@@ -10,10 +10,11 @@
     "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "prepare": "npm run eslint && npm run prettier && npx tsc",
     "test": "ENV=test db-migrate --env test up && jasmine-ts && db-migrate db:drop test",
+    "test2": "ENV=test && npx tsc && db-migrate db:create test && db-migrate --env test up && jasmine && db-migrate db:drop test",
     "prebuild": "rm -rf build",
     "build": "tsc -p ./tsconfig.json",
     "prestart": "npm run build",
-    "start": "node ./build/index"
+    "start": "node ./build/src/index"
     ,"jasmine": "jasmine -ts"
   },
   "author": "",
