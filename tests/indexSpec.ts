@@ -1,6 +1,6 @@
-import {MythicalWeaponStore} from '../src/models/mythical_weapon'
+import {UserStore} from '../src/models/user'
 
-const store=new MythicalWeaponStore();
+const store=new UserStore();
 
 describe('/mythical weapon model', ()=> {
 
