@@ -39,9 +39,25 @@ const create=async (req:Request,res:Response)=>{
       }
       
 }
+const remove=async (req:Request,res:Response)=>{
+      try{
+            console.log('\nin remove');
+      
+      const deleteWeapon=await store.remove(req.params.id)
+      console.log('the deleling weapon is:',deleteWeapon);
+      
+      res.json(deleteWeapon)
 
+      }catch(err){
+            res.status(400)
+            res.json(err)
+      }
+      
+}
 mythical_weapon_routes.get('/products',index)
 mythical_weapon_routes.get('/products/:id',show)
 mythical_weapon_routes.post('/make',create)
+mythical_weapon_routes.put('/remove/:id',remove)
+//mythical_weapon_routes.delete('/remove/:id',remove)
 
 export default mythical_weapon_routes;
