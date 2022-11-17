@@ -1,4 +1,3 @@
-import { response } from "express";
 import client from "../database";
 import bcrypt from "bcrypt"
 
