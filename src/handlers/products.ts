@@ -1,15 +1,15 @@
 import express, { Request, Response } from 'express'
-import { User, UserStore } from '../models/user'
-const user_routes = express()
+import { Product, ProductStore } from '../models/product'
+const product_routes = express()
 
-const store = new UserStore()
+const store = new ProductStore()
 const checkNan = (num: unknown): boolean => isNaN(num as number) || num as number <= 0 || num as number <= 0
 
 const index = async (_req: Request, res: Response) => {
       try {
-            const users = await store.index()
+            const  products= await store.index()
             console.log('in the index');
-            res.json(users)
+            res.json(products)
       } catch (err) {
             res.status(400).json(err)
 
@@ -23,9 +23,9 @@ const show = async (req: Request, res: Response) => {
             res.status(400).json('only positve numbers are allowd')
             return ;
             }
-            const user = await store.show(req.params.id)
+            const product = await store.show(req.params.id)
             console.log('in the show');
-            res.json(user)
+            res.json(product)
       }
       catch (err) {
             console.log(err);
@@ -38,26 +38,24 @@ const create = async (req: Request, res: Response) => {
       try {
             console.log('\ntriggerd');
 
-            const user: User = {
-                  firstname: req.body.firstname,
-                  lastname: req.body.lastname,
-                  username: req.body.username,
-                  password: req.body.password,
+            const product: Product = {
+                  name: req.body.name,
+                  price: req.body.price,
                   //since the id is autoincrement we dont need it right now
                   //id:req.body.id
             }
 
-            let property: keyof User;
-            for (property in user) {
+            let property: keyof Product;
+            for (property in product) {
                   //check if the filds are not empty
-                  if (user[property] == undefined || user[property]?.toString().trim() == "") {
+                  if (product[property] == undefined || product[property]?.toString().trim() == "") {
                         res.status(400).json("filds are't fill field, or some of it are empty")
                         return false;
                   }
             }
-            const newUser = await store.create(user)
+            const newProduct = await store.create(product)
             console.log('is:', req.body);
-            res.json(newUser)
+            res.json(newProduct)
 
       } catch (err) {
             console.log(err);
@@ -75,10 +73,10 @@ const remove = async (req: Request, res: Response) => {
                   return false;
             }
 
-            const deleteUser = await store.remove(req.params.id)
-            console.log('the deleling weapon is:', deleteUser);
+            const deleteProduct = await store.remove(req.params.id)
+            console.log('the deleling weapon is:', deleteProduct);
 
-            res.json(deleteUser)
+            res.json(deleteProduct)
 
       } catch (err) {
             res.status(400)
@@ -86,10 +84,10 @@ const remove = async (req: Request, res: Response) => {
       }
 
 }
-user_routes.get('/users', index)
-user_routes.get('/users/:id', show)
-user_routes.post('/users', create)
-user_routes.delete('/users/:id', remove)
+product_routes.get('/products', index)
+product_routes.get('/products/:id', show)
+product_routes.post('/products', create)
+product_routes.delete('/products/:id', remove)
 //mythical_weapon_routes.delete('/remove/:id',remove)
 
-export default user_routes;
+export default product_routes;
