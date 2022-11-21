@@ -86,7 +86,7 @@ const remove = async (req: Request, res: Response) => {
 }
 product_routes.get('/products', index)
 product_routes.get('/products/:id', show)
-product_routes.post('/products', create)
+product_routes.post('/products/create', create)
 product_routes.delete('/products/:id', remove)
 //mythical_weapon_routes.delete('/remove/:id',remove)
 
