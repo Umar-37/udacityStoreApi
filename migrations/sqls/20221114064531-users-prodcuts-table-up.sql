@@ -24,6 +24,3 @@ CREATE TABLE order_products (
   product_id INTEGER NOT NULL REFERENCES products (id),
   quantity   INTEGER NOT NULL
 );
-INSERT INTO users 
-VALUES (1,'hisaoa00','omar', 'alhussan','Omar.sdfsdk' )
-, (2,'xob_ksa','kaled', 'alqhtani','kaled.sdfsdk' );
