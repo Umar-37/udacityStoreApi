@@ -1,5 +1,8 @@
 import express, { Request, Response } from 'express'
 import { Order, OrderStore } from '../models/order'
+import { checkAuth, getToken } from "./auther"
+
+
 const order_routes = express()
 
 const store = new OrderStore()
@@ -69,30 +72,9 @@ const create = async (req: Request, res: Response) => {
       }
 
 }
-// const remove = async (req: Request, res: Response) => {
-//       try {
-//             console.log('\nin remove');
 
-//             if (checkNan(req.params.id)) {
-//                   res.status(400).send('only positve numbers are allowd')
-//                   return false;
-//             }
-
-//             const deleteProduct = await store.remove(req.params.id)
-//             console.log('the deleling weapon is:', deleteProduct);
-
-//             res.json(deleteProduct)
-
-//       } catch (err) {
-//             res.status(400)
-//             res.json(err)
-//       }
-
-// }
 order_routes.get('/orders', index)
-order_routes.get('/orders/:id', show)
-order_routes.post('/orders/create', create)
-//order_routes.delete('/orders/:id', remove)
-//mythical_weapon_routes.delete('/remove/:id',remove)
+order_routes.get('/orders/:id',checkAuth, show)
+order_routes.post('/orders/create',checkAuth, create)
 
 export default order_routes;

@@ -2,14 +2,14 @@ import client from "../database";
 import bcrypt from "bcrypt"
 
 export type OrderProduct = {
-    product_id: number;
+    product_id: number|unknown;
     quantity: number;
 }
 
 export type Order = {
     products: OrderProduct[];
     id?: number;
-    user_id: number;
+    user_id: number|unknown;
     status: boolean;
 }
 

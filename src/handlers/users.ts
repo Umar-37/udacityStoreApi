@@ -87,7 +87,7 @@ const remove = async (req: Request, res: Response) => {
       }
 
 }
-const authenticate = async (req: Request, res: Response) => {
+const authenticate = async (req: Request, res: Response):Promise<false|unknown> => {
       try {
 
             const userAuth: User = {
@@ -104,15 +104,7 @@ const authenticate = async (req: Request, res: Response) => {
                   }
             }
 
-            // if (userAuth.username === undefined || userAuth.password === undefined) {
-            //       res.status(400)
-            //       res.send("Some required parameters are missing! eg. :username, :password")
-            //       return false
-            // }
-
             const user: User | null  = await store.authenticate(userAuth.username, userAuth.password)
-
-
 
             if (user === null) {
                   res.status(401)
