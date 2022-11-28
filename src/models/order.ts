@@ -2,14 +2,14 @@ import client from "../database";
 import bcrypt from "bcrypt"
 
 export type OrderProduct = {
-    product_id: number|unknown;
+    product_id: number;
     quantity: number;
 }
 
 export type Order = {
     products: OrderProduct[];
     id?: number;
-    user_id: number|unknown;
+    user_id: number;
     status: boolean;
 }
 
@@ -65,15 +65,10 @@ export class OrderStore {
         try {
             const res = await conn.query(sql, [order.user_id, order.status])
             const row = res.rows[0]
-            console.log('the first one in create is working:', row);
 
             const theOrder: Order = row;
-            console.log('the theOrder is:', theOrder);
-
-
             const orderProductsSql = "INSERT INTO order_products (order_id, product_id, quantity) VALUES($1, $2, $3) RETURNING product_id, quantity"
             const orderProducts: OrderProduct[] = []
-            //console.log('reult is:', result);
             for (const product of order.products) {
 
                 const { product_id, quantity } = product
@@ -95,25 +90,5 @@ export class OrderStore {
 
         }
     }
-    // async remove(id: string): Promise<User> {
-    //         const conn = await client.connect()
-    //     try {
-    //         const deleted =this.show(id)
-    //         const conn = await client.connect()
-    //         const sql = `DELETE FROM users WHERE id=${id}`
-    //         const result = await conn.query(sql)
-    //         console.log('result is :',result);
-
-    //         //return result.rows
-    //         return deleted 
-    //     } catch (err) {
-    //         throw new Error(`Could't delete the user:${err}`);
-
-    //     }finally{
-
-    //         conn.release()
-    //     }
-
-
 }
 

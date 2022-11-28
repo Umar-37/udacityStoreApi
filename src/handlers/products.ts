@@ -27,7 +27,6 @@ const show = async (req: Request, res: Response) => {
             return ;
             }
             const product = await store.show(req.params.id)
-            console.log('in the show');
             res.json(product)
       }
       catch (err) {

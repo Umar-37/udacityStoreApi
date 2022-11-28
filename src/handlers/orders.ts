@@ -48,8 +48,6 @@ const create = async (req: Request, res: Response) => {
                   //since the id is autoincrement we dont need it right now
                   //id:req.body.id
             }
-            console.log('in the handler,products info is :');
-            console.dir(order);
             
             
 

@@ -121,10 +121,3 @@ export class UserStore {
 
 
 }
-
-// async function name() {
-// let s=new MythicalWeaponStore()
-// let ss=s.show(2)
-//    console.log(await  ss) 
-// }
-//name()

@@ -24,3 +24,4 @@ CREATE TABLE order_products (
   product_id INTEGER NOT NULL REFERENCES products (id),
   quantity   INTEGER NOT NULL
 );
+        INSERT INTO users(id,firstname, lastname, username,password) VALUES (100,'omar', 'last', 'hisaoa','1234') 

@@ -17,7 +17,7 @@ ENV
 if(ENV === 'test'){
  client= new Pool({
     host:POSTGRES_HOST,
-    database:POSTGRES_DB,
+    database:'test',
     user:POSTGRES_USER,
     password:POSTGRES_PASSWORD,
 })
