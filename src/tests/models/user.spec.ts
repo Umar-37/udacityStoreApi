@@ -23,7 +23,6 @@ describe('User Model', () => {
         const userId = users[0].id as number
 
         const result = await store.show(userId+'')
-        console.log('kdfjsdkf:',result);
         
         // @ts-ignore
         expect(result[0].username).toEqual('hisaoa')

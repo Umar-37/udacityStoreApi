@@ -11,7 +11,6 @@ const checkNan = (num: unknown): boolean => isNaN(num as number) || num as numbe
 const index = async (_req: Request, res: Response) => {
       try {
             const  products= await store.index()
-            console.log('in the index');
             res.json(products)
       } catch (err) {
             res.status(400).json(err)
@@ -38,7 +37,6 @@ const show = async (req: Request, res: Response) => {
 }
 const create = async (req: Request, res: Response) => {
       try {
-            console.log('\ntriggerd');
 
             const product: Product = {
                   name: req.body.name,
@@ -56,7 +54,6 @@ const create = async (req: Request, res: Response) => {
                   }
             }
             const newProduct = await store.create(product)
-            console.log('is:', req.body);
             res.json(newProduct)
 
       } catch (err) {
@@ -66,30 +63,9 @@ const create = async (req: Request, res: Response) => {
       }
 
 }
-const remove = async (req: Request, res: Response) => {
-      try {
-            console.log('\nin remove');
 
-            if (checkNan(req.params.id)) {
-                  res.status(400).send('only positve numbers are allowd')
-                  return false;
-            }
-
-            const deleteProduct = await store.remove(req.params.id)
-            console.log('the deleling weapon is:', deleteProduct);
-
-            res.json(deleteProduct)
-
-      } catch (err) {
-            res.status(400)
-            res.json(err)
-      }
-
-}
 product_routes.get('/products', index)
 product_routes.get('/products/:id', show)
 product_routes.post('/products/create',checkAuth, create)
-//product_routes.delete('/products/:id', remove)
-//mythical_weapon_routes.delete('/remove/:id',remove)
 
 export default product_routes;

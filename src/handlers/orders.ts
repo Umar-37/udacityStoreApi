@@ -11,7 +11,6 @@ const checkNan = (num: unknown): boolean => isNaN(num as number) || num as numbe
 const index = async (_req: Request, res: Response) => {
       try {
             const  orders= await store.index()
-            console.log('in the index');
             res.json(orders)
       } catch (err) {
             res.status(400).json(err)
@@ -27,7 +26,6 @@ const show = async (req: Request, res: Response) => {
             return ;
             }
             const order = await store.show(req.params.id)
-            console.log('in the show');
             res.json(order)
       }
       catch (err) {
@@ -39,7 +37,6 @@ const show = async (req: Request, res: Response) => {
 }
 const create = async (req: Request, res: Response) => {
       try {
-            console.log('\ntriggerd');
 
             const order: Order = {
                   products: req.body.products,
@@ -60,7 +57,7 @@ const create = async (req: Request, res: Response) => {
                   }
             }
             const newProduct = await store.create(order)
-            console.log('is:', req.body);
+            
             res.json(newProduct)
 
       } catch (err) {

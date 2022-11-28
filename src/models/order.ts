@@ -59,7 +59,6 @@ export class OrderStore {
         }
     }
     async create(order: Order): Promise<Order> {
-        console.log("in create", order);
         const conn = await client.connect()
         const sql = "INSERT INTO orders (user_id, status) VALUES($1, $2) RETURNING *"
         try {

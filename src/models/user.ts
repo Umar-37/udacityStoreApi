@@ -42,7 +42,6 @@ export class UserStore {
         }
     }
     async create(user: User) {
-        console.log("in create", user);
         const conn = await client.connect()
         const sql = 'INSERT INTO users(firstname, lastname, username,password) VALUES ($1, $2, $3,$4) RETURNING *'
 
@@ -62,7 +61,6 @@ export class UserStore {
 
                 // }
             )
-            //console.log('reult is:', result);
 
             conn.release()
             return result.rows
@@ -79,7 +77,6 @@ export class UserStore {
             const conn = await client.connect()
             const sql = `DELETE FROM users WHERE id=${id}`
             const result = await conn.query(sql)
-            console.log('result is :', result);
 
             //return result.rows
             return deleted
@@ -101,7 +98,6 @@ export class UserStore {
           if (result.rows.length > 0) {
             const user:User = result.rows[0]
     
-            console.log(user);
             
             if (bcrypt.compareSync(password + BCRYPT_PASSWORD, user.password)) {
 

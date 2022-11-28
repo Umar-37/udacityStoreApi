@@ -35,7 +35,6 @@ export class ProductStore {
         }
     }
     async create(product: Product) {
-        console.log("in create", product);
         const conn = await client.connect()
         const sql = 'INSERT INTO products(price,name) VALUES ($1, $2) RETURNING *'
 
@@ -51,25 +50,7 @@ export class ProductStore {
 
         }
     }
-    async remove(id: string): Promise<Product> {
-        const conn = await client.connect()
-        try {
-            const deleted = this.show(id)
-            const conn = await client.connect()
-            const sql = `DELETE FROM Prodcuts WHERE id=${id}`
-            const result = await conn.query(sql)
-            console.log('result is :', result);
-
-            //return result.rows
-            return deleted
-        } catch (err) {
-            throw new Error(`Could't delete the product:${err}`);
-
-        } finally {
-
-            conn.release()
-        }
-    }
+    
 
 
 }

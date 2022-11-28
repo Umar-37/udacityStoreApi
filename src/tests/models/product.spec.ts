@@ -19,7 +19,6 @@ describe('Product Model', () => {
 
     it('should return a list of products', async () => {
         const result = await store.index()
-console.log("result is:",result);
 
         expect(result).toEqual([
             // @ts-ignore

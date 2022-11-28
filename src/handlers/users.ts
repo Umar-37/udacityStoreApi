@@ -9,7 +9,6 @@ const checkNan = (num: unknown): boolean => isNaN(num as number) || num as numbe
 const index = async (_req: Request, res: Response) => {
       try {
             const users = await store.index()
-            console.log('in the index');
             res.json(users)
       } catch (err) {
             res.status(400).json(err)
@@ -25,7 +24,6 @@ const show = async (req: Request, res: Response) => {
                   return;
             }
             const user = await store.show(req.params.id)
-            console.log('in the show');
             res.json(user)
       }
       catch (err) {
@@ -37,7 +35,6 @@ const show = async (req: Request, res: Response) => {
 }
 const create = async (req: Request, res: Response) => {
       try {
-            console.log('\ntriggerd');
 
             const user: User = {
                   firstname: req.body.firstname,
@@ -57,7 +54,6 @@ const create = async (req: Request, res: Response) => {
                   }
             }
             const newUser = await store.create(user)
-            console.log('is:', req.body);
             res.json(newUser)
 
       } catch (err) {
@@ -67,26 +63,7 @@ const create = async (req: Request, res: Response) => {
       }
 
 }
-const remove = async (req: Request, res: Response) => {
-      try {
-            console.log('\nin remove');
 
-            if (checkNan(req.params.id)) {
-                  res.status(400).send('only positve numbers are allowd')
-                  return false;
-            }
-
-            const deleteUser = await store.remove(req.params.id)
-            console.log('the deleling weapon is:', deleteUser);
-
-            res.json(deleteUser)
-
-      } catch (err) {
-            res.status(400)
-            res.json(err)
-      }
-
-}
 const authenticate = async (req: Request, res: Response):Promise<false|unknown> => {
       try {
 
