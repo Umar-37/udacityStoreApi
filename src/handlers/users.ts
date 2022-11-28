@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express'
 import { UserStore, User } from '../models/user'
-import { checkAuth, getToken } from "./auther"
 const user_routes = express()
 
 const store = new UserStore()
@@ -64,43 +63,10 @@ const create = async (req: Request, res: Response) => {
 
 }
 
-const authenticate = async (req: Request, res: Response):Promise<false|unknown> => {
-      try {
 
-            const userAuth: User = {
-                  username: req.body.username as unknown as string,
-                  password: req.body.password as unknown as string,
-            };
-
-                  let property: keyof User;
-                  for (property in userAuth) {
-                  //check if the filds are not empty
-                  if (userAuth[property] == undefined || userAuth[property]?.toString().trim() == "") {
-                        res.status(400).json("filds aren't fill field, or some of it are empty")
-                        return false;
-                  }
-            }
-
-            const user: User | null  = await store.authenticate(userAuth.username, userAuth.password)
-
-            if (user === null) {
-                  res.status(401)
-                  res.json(`password is not for user ${userAuth.username}, or ${userAuth.username} does not exist.`)
-
-                  return false
-            }
-
-            res.json(getToken(user))
-      } catch (e) {
-            res.status(400)
-            res.json(e)
-      }
-}
-user_routes.get('/users', checkAuth, index)
-user_routes.get('/users/:id', checkAuth, show)
-user_routes.post('/users/create', checkAuth, create)
-user_routes.post("/users/auth", authenticate)
-//user_routes.delete('/users/:id', remove)
+user_routes.get('/users', index)
+user_routes.get('/users/:id', show)
+user_routes.post('/users/create', create)
 //mythical_weapon_routes.delete('/remove/:id',remove)
 
 export default user_routes;

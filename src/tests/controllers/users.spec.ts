@@ -1,10 +1,8 @@
 import supertest from 'supertest'
 import {app} from '../../index'
-import { getToken } from '../../handlers/auther'
 
 
 const request = supertest(app)
-const token: string = getToken({username:'hisaoa',password:'1234'})
 
 
 describe('test the users controllers: ', () => {
@@ -36,7 +34,6 @@ describe('test the users controllers: ', () => {
         }
         request
             .post('/api/users/create')
-            .set('Authorization', `Bearer ${token}`)
             .send(data)
             .expect('Content-Type', 'application/json')
             .expect(400)
@@ -53,7 +50,6 @@ describe('test the users controllers: ', () => {
         }
         request
             .post('/api/users/create')
-            .set('Authorization', `Bearer ${token}`)
             .send(data)
             .expect('Content-Type', 'application/json')
             .expect(400)
@@ -65,7 +61,6 @@ describe('test the users controllers: ', () => {
     it('/users should return all users', () => {
         request
             .get('/api/users')
-            .set('Authorization', `Bearer ${token}`)
             .expect(200)
             .expect('Content-Type', 'application/json')
             .expect([
@@ -81,7 +76,6 @@ describe('test the users controllers: ', () => {
     it('/users/:id should return user', () => {
         request
             .get('/api/users/1')
-            .set('Authorization', `Bearer ${token}`)
             .expect('Content-Type', 'application/json')
             .expect(200)
             .expect({

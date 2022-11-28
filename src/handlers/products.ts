@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express'
 import { Product, ProductStore } from '../models/product'
-import { checkAuth, getToken } from "./auther"
 
 
 const product_routes = express()
@@ -66,6 +65,6 @@ const create = async (req: Request, res: Response) => {
 
 product_routes.get('/products', index)
 product_routes.get('/products/:id', show)
-product_routes.post('/products/create',checkAuth, create)
+product_routes.post('/products/create', create)
 
 export default product_routes;

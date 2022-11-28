@@ -1,10 +1,8 @@
 import supertest from 'supertest'
 import {app} from '../../index'
-import { getToken } from '../../handlers/auther'
 
 
 const request = supertest(app)
-const token: string = getToken({username:'hisaoa',password:'1234'})
 
 describe('test the product controllers: ', () => {
     it('should return a new user after creation', () => {
@@ -15,7 +13,6 @@ describe('test the product controllers: ', () => {
         }
         request
             .post('/api/products/create')
-            .set('Authorization', `Bearer ${token}`)
             .send(data)
             .expect('Content-Type', /json/)
             .expect(201)
@@ -35,7 +32,6 @@ describe('test the product controllers: ', () => {
         }
         request
             .post('/api/products/create')
-            .set('Authorization', `Bearer ${token}`)
             .send(data)
             .expect(400)
             .expect({

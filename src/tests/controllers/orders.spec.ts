@@ -1,9 +1,7 @@
 import supertest from 'supertest'
 import {app} from '../../index'
-import { getToken } from '../../handlers/auther'
 
 const request = supertest(app)
-const token: string = getToken({username:'hisaoa',password:'1234'})
 
 describe('test the Orders controllers: ', () => {
     it('/orders/create should create and  return new order ', () => {
@@ -13,7 +11,6 @@ describe('test the Orders controllers: ', () => {
         }
         request
             .post('/api/orders/create')
-            .set('Authorization', `Bearer ${token}`)
             .send(data)
             .expect('Content-Type', 'application/json')
             .expect(201)
@@ -31,7 +28,6 @@ describe('test the Orders controllers: ', () => {
         }
         request
             .post('/api/orders/add-product/1')
-            .set('Authorization', `Bearer ${token}`)
             .send(data)
             .expect('Content-Type', 'application/json')
             .expect(201)
@@ -49,7 +45,6 @@ describe('test the Orders controllers: ', () => {
         }
         request
             .post('/api/orders/create')
-            .set('Authorization', `Bearer ${token}`)
             .send(data)
             .expect(400)
             .expect({
@@ -63,7 +58,6 @@ describe('test the Orders controllers: ', () => {
         }
         request
             .post('/api/orders/create')
-            .set('Authorization', `Bearer ${token}`)
             .send(data)
             .expect(400)
             .expect({
@@ -86,7 +80,6 @@ describe('test the Orders controllers: ', () => {
     it('/orders/:id return order', () => {
         request
             .get('/api/orders/1')
-            .set('Authorization', `Bearer ${token}`)
             .expect('Content-Type', 'application/json')
             .expect(200)
             .expect({
@@ -99,7 +92,6 @@ describe('test the Orders controllers: ', () => {
     it('/orders/current-order/:id should return orders with true status', () => {
         request
             .get('/api/orders/current-order/1')
-            .set('Authorization', `Bearer ${token}`)
             .expect('Content-Type', /json/)
             .expect(200)
             .expect({

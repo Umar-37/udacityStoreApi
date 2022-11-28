@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express'
 import { Order, OrderStore } from '../models/order'
-import { checkAuth, getToken } from "./auther"
 
 
 const order_routes = express()
@@ -69,7 +68,7 @@ const create = async (req: Request, res: Response) => {
 }
 
 order_routes.get('/orders', index)
-order_routes.get('/orders/:id',checkAuth, show)
-order_routes.post('/orders/create',checkAuth, create)
+order_routes.get('/orders/:id', show)
+order_routes.post('/orders/create', create)
 
 export default order_routes;

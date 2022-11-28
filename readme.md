@@ -17,16 +17,16 @@
 
 #### Users
 - Create `/users/create` [POST] 
-- Auth `/users/auth` [POST] [token required]
-- Index `/users` [GET] [token required]
-- Show `/users/:id` [GET] [token required]
+- Auth `/users/auth` [POST] 
+- Index `/users` [GET] 
+- Show `/users/:id` [GET] 
 
 #### Products
-- Create `/products/create` [POST] [token required]
+- Create `/products/create` [POST] 
 - Index `/products` [GET]
 - Show `/products/:id` [GET]
 
 #### Orders
-- Create `/orders/create` [POST] [token required]
+- Create `/orders/create` [POST] 
 - Index `/orders` [GET] 
-- Show `/orders/:id` [GET] [token required]
+- Show `/orders/:id` [GET] 
