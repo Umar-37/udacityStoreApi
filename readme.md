@@ -1,7 +1,7 @@
 ## Set up
 
-- `docker-compose up` to start docker
 - `npm i` to install dependencies
+- `docker-compose up -d` to start docker in the background
 - `npm run upDev` to set up the development database
 - `npm run build` to build the app
 
