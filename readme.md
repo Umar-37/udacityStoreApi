@@ -91,4 +91,3 @@ Table: *order_products*
 - Create `/orders/create` [POST] 
 - Index `/orders` [GET] 
 - Show `/orders/:id` [GET] 
->>>>>>> c94aeedc3acfc140a0b08667922179ce1581782e
