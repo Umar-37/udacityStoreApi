@@ -13,20 +13,65 @@
 
 - `npm run test` to run create the testing database and run all tests
 
-## Routes 
+## API Endpoints
 
 #### Users
-- Create `/users/create` [POST] 
-- Auth `/users/auth` [POST] [token required]
-- Index `/users` [GET] [token required]
-- Show `/users/:id` [GET] [token required]
+- Create [POST] `/users/create`  
+- Auth [POST] `/users/auth`  
+- Index [GET] `/users`  
+- Show [GET] `/users/:id`  
 
 #### Products
-- Create `/products/create` [POST] [token required]
-- Index `/products` [GET]
-- Show `/products/:id` [GET]
+- Create [POST] `/products/create`  
+- Index [GET] `/products` 
+- Show [GET] `/products/:id` 
 
 #### Orders
-- Create `/orders/create` [POST] [token required]
-- Index `/orders` [GET] 
-- Show `/orders/:id` [GET] [token required]
+- Create [POST] `/orders/create`  
+- Index [GET] `/orders`  
+- Show [GET] `/orders/:id`  
+
+### Ports
+The application runs on port `3000` with database on `5432` and Pgadmin on `5050`.
+
+### Environment variables 
+To satisfy Udacity requirements, the following environment variable are needed.
+```
+ENV=dev
+TEST_VAR=testing123
+# DB VARIABLES
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DB=postgres
+POSTGRES_USER=root
+POSTGRES_PASSWORD=admin
+# BCRYPT VARIABLES
+BCRYPT_PASSWORD=my-name-is
+SALT_ROUNDS=10
+# JWT
+TOKEN_SECRET=123
+```
+## Database schema
+#### Product
+Table: *products*
+- id `SERIAL PRIMARY KEY`
+- name `VARCHAR`
+- price `INTEGER`
+
+#### User
+Table: *users*
+- id `SERIAL PRIMARY KEY`
+- username `VARCHAR`
+- firstname `VARCHAR`
+- lastname `VARCHAR`
+- password `VARCHAR`
+
+#### Orders
+Table: *orders*
+- id `SERIAL PRIMARY KEY`
+- user_id `INTEGER` `REFERENCES users(id)`
+- status `BOOLEAN`
+
+Table: *order_products*
+- order_id `INTEGER` `REFERENCES orders(id)` 
+- product_id `INTEGER` `REFERENCES products(id)`
+- quantity `INTEGER`
