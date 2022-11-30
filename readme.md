@@ -76,18 +76,4 @@ Table: *order_products*
 - order_id `INTEGER` `REFERENCES orders(id)` 
 - product_id `INTEGER` `REFERENCES products(id)`
 - quantity `INTEGER`
-=======
-- Create `/users/create` [POST] 
-- Auth `/users/auth` [POST] 
-- Index `/users` [GET] 
-- Show `/users/:id` [GET] 
 
-#### Products
-- Create `/products/create` [POST] 
-- Index `/products` [GET]
-- Show `/products/:id` [GET]
-
-#### Orders
-- Create `/orders/create` [POST] 
-- Index `/orders` [GET] 
-- Show `/orders/:id` [GET] 
